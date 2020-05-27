@@ -1,4 +1,4 @@
-package org.vander.keyshared;
+package org.vander.failover;
 
 import org.apache.pulsar.client.api.*;
 import org.apache.pulsar.client.impl.Murmur3_32Hash;
@@ -16,12 +16,10 @@ public class PulsarConsumers {
                 .build();
 
         consumer = client.newConsumer()
-                .topic("public/dominos/coupon3")
+                .topic("public/dominos/coupon4")
                 .ackTimeout(30, TimeUnit.SECONDS)
                 .subscriptionName("my-subscription")
-                //.keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(0,65535)))
-               // .keySharedPolicy(KeySharedPolicy.autoSplitHashRange())
-                .subscriptionType(SubscriptionType.Key_Shared)
+                .subscriptionType(SubscriptionType.Failover)
                 .subscribe();
 
         startConsumer();

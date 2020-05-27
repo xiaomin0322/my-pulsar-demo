@@ -1,4 +1,6 @@
-package org.vander.shared;
+package org.vander.delayed;
+
+import java.util.concurrent.TimeUnit;
 
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
@@ -17,16 +19,34 @@ public class PulsarProducer {
                 .topic("my-topic")
                 .create();
 
-        startProducer();
+        startProducer2();
 
     }
+    
+    private static void startProducer2() throws Exception {
+
+            System.out.println("Start produce");
+            
+            producer.newMessage()
+            .value("my-message-".getBytes())
+            .send();
+            
+            producer.newMessage()
+                    .value("my-DeliverAfter -message-".getBytes())
+                    .deliverAfter(5, TimeUnit.SECONDS)
+                    .send();
+            
+            
+    }
+            
 
     private static void startProducer() throws Exception {
 
         while (true) {
             System.out.println("Start produce");
             producer.newMessage()
-                    .value("my-message-".getBytes())
+                    .value("my-DeliverAfter -message-".getBytes())
+                    .deliverAfter(5, TimeUnit.SECONDS)
                     .send();
 
 

@@ -1,4 +1,4 @@
-package org.vander.shared;
+package org.vander.delayed;
 
 import java.util.concurrent.TimeUnit;
 
@@ -41,7 +41,14 @@ public class PulsarConsumers {
             // Wait for a message
             Message<byte[]> msg = consumer.receive();
             try {
-                System.out.printf("Message received: %s", new String(msg.getData()));
+               // System.out.printf("Message received: %s", new String(msg.getData()));
+                
+                
+                System.out.println("Consumer Received message : " + new String(msg.getValue())
+                + "; Difference between publish time and receive time = "
+                + (System.currentTimeMillis() - msg.getPublishTime()) / 1000
+                + " seconds");
+                
                 consumer.acknowledge(msg);
             } catch (Exception e) {
                 System.err.printf("Unable to consume message: %s", e.getMessage());

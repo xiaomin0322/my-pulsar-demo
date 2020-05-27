@@ -1,4 +1,4 @@
-package org.vander.shared;
+package org.vander.deadletter;
 
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
@@ -23,14 +23,12 @@ public class PulsarProducer {
 
     private static void startProducer() throws Exception {
 
-        while (true) {
-            System.out.println("Start produce");
-            producer.newMessage()
-                    .value("my-message-".getBytes())
-                    .send();
-
-
-            Thread.sleep(1000);
-        }
+    	 System.out.println("Start produce");
+         producer.newMessage()
+                 .value("my-message-3".getBytes())
+                 .send();
+         producer.newMessage()
+                 .value("my-message-4".getBytes())
+                 .send();
     }
 }

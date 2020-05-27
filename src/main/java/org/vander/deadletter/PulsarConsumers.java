@@ -1,4 +1,4 @@
-package org.vander.shared;
+package org.vander.deadletter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +26,7 @@ public class PulsarConsumers {
                 .subscriptionName("my-subscription")
                 .subscriptionType(SubscriptionType.Shared)
                 .deadLetterPolicy(DeadLetterPolicy.builder()
-                        .maxRedeliverCount(10)
+                        .maxRedeliverCount(2)
                         .deadLetterTopic("dl-topic-name")
                         .build())
                 .subscribe();
@@ -37,15 +37,22 @@ public class PulsarConsumers {
 
     private static void startConsumer() throws PulsarClientException {
 
+    	 int numReceived = 0;
         while (true) {
             // Wait for a message
             Message<byte[]> msg = consumer.receive();
             try {
-                System.out.printf("Message received: %s", new String(msg.getData()));
-                consumer.acknowledge(msg);
-            } catch (Exception e) {
-                System.err.printf("Unable to consume message: %s", e.getMessage());
-                consumer.negativeAcknowledge(msg);
+                System.out.printf("Message received: %s", new String(msg.getData())+ "; Don't send ack \r\n");
+                //consumer.acknowledge(msg);
+                ++numReceived;
+            } catch (Exception ie) {
+            	if (ie.getCause() instanceof InterruptedException) {
+                    System.out.println("Successfully received " + numReceived + " messages \r\n");
+                    Thread.currentThread().interrupt();
+                } else {
+                    throw ie;
+                }
+               // consumer.negativeAcknowledge(msg);
             }
         }
     }
