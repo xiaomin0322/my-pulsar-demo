@@ -8,7 +8,11 @@ import org.apache.pulsar.client.api.MessageListener;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.api.SubscriptionType;
-
+/**
+ * 目前有问题
+ * @author Zengmin.Zhang
+ *
+ */
 public class MyConsumer {
 	private static final int NUM_CONSUMERS = 20;
 
@@ -19,6 +23,7 @@ public class MyConsumer {
 		System.err.println(topic + " " + subscriptionName);
 
 		PulsarClient client = PulsarClient.builder().serviceUrl(org.vander.common.Config.URL)
+				//为了应付多topic消费的 ,单个topic事实上，就是一个线程在消费 针对多topic，如果要实现单topic多线程消费，自己实现线程池 
 				.listenerThreads(NUM_CONSUMERS).build();
 
 		MessageListener<byte[]> listener = (consumer, msg) -> {

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * @author Zengmin.Zhang
  *
  */
-public class PulsarConsumers {
+public class PulsarConsumers1 {
 
     private static PulsarClient client;
     private static Consumer<byte[]> consumer;
@@ -19,14 +19,13 @@ public class PulsarConsumers {
         client = PulsarClient.builder()
                 .serviceUrl(org.vander.common.Config.URL)
                 .build();
-        
 
         consumer = client.newConsumer()
                 //.topic("public/dominos/coupon3")
         		 .topic("my-topic")
                 .ackTimeout(30, TimeUnit.SECONDS)
                 .subscriptionName("my-subscription")
-                .keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(35535,65535)))
+                .keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(0,35535)))
                // .keySharedPolicy(KeySharedPolicy.autoSplitHashRange())
                 .subscriptionType(SubscriptionType.Key_Shared)
                 .subscribe();

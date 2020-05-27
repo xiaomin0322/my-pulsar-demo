@@ -20,13 +20,15 @@ public class PulsarProducer {
                 .topic("my-topic")
                 .create();
 
-        startProducer();
+        startProducer3();
+        
+        System.exit(1);
 
     }
     
     private static void startProducer3() throws Exception {
-    	for(int i=0;i<10;i++) {
-    		 producer.newMessage().orderingKey(UUID.randomUUID().toString().getBytes()).value(("message-1-"+i+"\n").getBytes()).send();
+    	for(int i=0;i<100;i++) {
+    		 producer.newMessage().key(UUID.randomUUID().toString()).value(("message-1-"+i+"\n").getBytes()).send();
     	}
     }
     
