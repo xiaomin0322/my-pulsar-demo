@@ -1,11 +1,11 @@
-package org.vander.keyshared;
+package org.vander.listener;
 
 import java.util.UUID;
 
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 
-public class PulsarProducer {
+public class PulsarProducerSing {
 
     private static PulsarClient client;
     private static Producer<byte[]> producer;
@@ -20,13 +20,14 @@ public class PulsarProducer {
                 .topic("my-topic")
                 .create();
 
-        startProducer();
+        startProducer3();
 
     }
     
     private static void startProducer3() throws Exception {
-    	for(int i=0;i<10;i++) {
+    	for(int i=0;i<20;i++) {
     		 producer.newMessage().orderingKey(UUID.randomUUID().toString().getBytes()).value(("message-1-"+i+"\n").getBytes()).send();
+    		 producer.newMessage().orderingKey(UUID.randomUUID().toString().getBytes()).value(("message-2-"+i+"\n").getBytes()).send();
     	}
     }
     
