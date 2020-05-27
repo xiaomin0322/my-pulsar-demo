@@ -1,6 +1,8 @@
 package org.vander.listener;
 
 import java.util.concurrent.TimeUnit;
+
+import org.apache.pulsar.client.api.Consumer;
 import org.apache.pulsar.client.api.ConsumerBuilder;
 import org.apache.pulsar.client.api.MessageListener;
 import org.apache.pulsar.client.api.PulsarClient;
@@ -12,7 +14,8 @@ public class MyConsumer {
 
 	public static void main(String[] args) throws PulsarClientException {
 		String topic = "my-topic";
-		String subscriptionName = "my-subscription";
+		//topic = "public/dominos/coupon5";
+		String subscriptionName = "my-subscription2";
 		System.err.println(topic + " " + subscriptionName);
 
 		PulsarClient client = PulsarClient.builder().serviceUrl(org.vander.common.Config.URL)
@@ -29,15 +32,15 @@ public class MyConsumer {
 				.negativeAckRedeliveryDelay(1, TimeUnit.SECONDS);
 		
 
-		builder.subscribe();
+		Consumer<byte[]> consumer =  builder.subscribe();
+		
 		/*for (int i = 0; i < NUM_CONSUMERS; ++i) {
 			builder.subscribe();
 		}*/
 
 		/*while (true) {
 			try {
-				builder.subscribe();
-				//Thread.sleep(1);
+				Thread.sleep(1);
 			} catch (Exception e) {
 				Thread.interrupted();
 				e.printStackTrace();

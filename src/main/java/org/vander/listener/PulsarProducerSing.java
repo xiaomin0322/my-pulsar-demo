@@ -2,6 +2,7 @@ package org.vander.listener;
 
 import java.util.UUID;
 
+import org.apache.pulsar.client.api.MessageRoutingMode;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 
@@ -16,8 +17,9 @@ public class PulsarProducerSing {
                 .build();
 
         producer = client.newProducer()
-                //.topic("public/dominos/coupon3")
-                .topic("my-topic")
+        		//.messageRoutingMode(MessageRoutingMode.SinglePartition)
+                .topic("public/dominos/coupon5")
+               // .topic("my-topic")
                 .create();
 
         startProducer3();
@@ -26,8 +28,8 @@ public class PulsarProducerSing {
     
     private static void startProducer3() throws Exception {
     	for(int i=0;i<20;i++) {
-    		 producer.newMessage().orderingKey(UUID.randomUUID().toString().getBytes()).value(("message-1-"+i+"\n").getBytes()).send();
-    		 producer.newMessage().orderingKey(UUID.randomUUID().toString().getBytes()).value(("message-2-"+i+"\n").getBytes()).send();
+    		 producer.newMessage().key(UUID.randomUUID().toString()).value(("message-1-"+i+"\n").getBytes()).send();
+    		 producer.newMessage().key(UUID.randomUUID().toString()).value(("message-2-"+i+"\n").getBytes()).send();
     	}
     }
     
