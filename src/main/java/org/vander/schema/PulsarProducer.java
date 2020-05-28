@@ -108,10 +108,11 @@ public class PulsarProducer {
 
     private static void startProducer() throws Exception {
 
-    	int index = 0;
+    	int index = 10;
         while (true) {
         	SensorReading reading = new SensorReading();
         	reading.setTemperature("name"+index);
+        	index ++;
             System.out.println("Start produce");
             producer.newMessage()
                     .value(reading)
