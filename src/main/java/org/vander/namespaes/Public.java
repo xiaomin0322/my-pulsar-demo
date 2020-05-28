@@ -31,6 +31,15 @@ root@pulsar:/pulsar/bin# ./pulsar-admin namespaces get-backlog-quotas public/def
 }
 
 
+http://pulsar.apache.org/docs/zh-CN/cookbooks-retention-expiry/#%E8%8E%B7%E5%8F%96-backlog-%E5%A4%A7%E5%B0%8F%E9%98%88%E5%80%BC%E5%92%8C-backlog-%E4%BF%9D%E7%95%99%E7%AD%96%E7%95%A5
+
+策略	触发的操作
+producer_request_hold	Broker 会持有生产者投递的消息，但并不会把投递的消息进行持久化存储
+producer_exception	Broker 会与客户端断开连接并抛出异常
+consumer_backlog_eviction	Broker 将开始丢弃backlog的消息
+
+
+
 
 
 
