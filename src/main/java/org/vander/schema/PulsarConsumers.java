@@ -24,7 +24,7 @@ public class PulsarConsumers {
         consumer = client.newConsumer(JSONSchema.of(SensorReading.class))
         		.topic("my-topicschema-")
                 .ackTimeout(30, TimeUnit.SECONDS)
-                .subscriptionName("my-subscription")
+                .subscriptionName("my-my_topicschema")
                 .subscriptionType(SubscriptionType.Shared)
                 .deadLetterPolicy(DeadLetterPolicy.builder()
                         .maxRedeliverCount(10)

@@ -99,7 +99,7 @@ public class PulsarProducer {
                 .build();
 
         producer = client.newProducer(JSONSchema.of(SensorReading.class))
-                .topic("my-topicschema-1")
+                .topic("my_topicschema")
                 .create();
 
         startProducer();
