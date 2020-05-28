@@ -83,6 +83,8 @@ using schema:
 	2.ÐÂÔö×Ö¶Î¼æÈÝ
 	3.
 	
+	
+	https://pulsar.apache.org/docs/zh-CN/2.5.2/schema-evolution-compatibility/#always_compatible-%E5%92%8C-always_incompatible
  * @author Zengmin.Zhang
  *
  */
@@ -97,7 +99,7 @@ public class PulsarProducer {
                 .build();
 
         producer = client.newProducer(JSONSchema.of(SensorReading.class))
-                .topic("my-topicschema-")
+                .topic("my-topicschema-1")
                 .create();
 
         startProducer();

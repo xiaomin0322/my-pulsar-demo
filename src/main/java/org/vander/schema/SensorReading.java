@@ -3,18 +3,16 @@ package org.vander.schema;
 public class SensorReading {
 	public String temperature;
 	
-	public String addStr;
-	
+	public long addStr;
 	
 
-	public String getAddStr() {
+	public long getAddStr() {
 		return addStr;
 	}
 
-	public void setAddStr(String addStr) {
+	public void setAddStr(long addStr) {
 		this.addStr = addStr;
 	}
-
 
 	public String getTemperature() {
 		return temperature;
