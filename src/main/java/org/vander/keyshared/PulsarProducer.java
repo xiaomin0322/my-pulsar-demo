@@ -20,7 +20,7 @@ public class PulsarProducer {
                 .topic("my-topic")
                 .create();
 
-        startProducer3();
+        startProducer();
         
         System.exit(1);
 
