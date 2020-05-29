@@ -9,7 +9,7 @@ import org.apache.pulsar.client.api.SubscriptionType;
 public class PulsarConsumers2 {
 
 	private static PulsarClient client;
-	private static Consumer<byte[]> consumer;
+	private static Consumer<String> consumer;
 
 	public static void main(String[] args) throws Exception {
 		
@@ -68,7 +68,7 @@ public class PulsarConsumers2 {
 
 		while (true) {
 			// Wait for a message
-			Message<byte[]> msg = consumer.receive();
+			Message<String> msg = consumer.receive();
 			try {
 				System.out.printf("Message received: %s", new String(msg.getData()) + "\r\n");
 				consumer.acknowledge(msg);
