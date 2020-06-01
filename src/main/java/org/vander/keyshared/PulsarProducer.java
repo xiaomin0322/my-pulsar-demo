@@ -7,6 +7,18 @@ import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.Schema;
 
+
+/**
+ * 嗯嗯，这个的问题是将几条消息打包在一起发送了，而默认打包是根据大小和时间来定的
+ * ，这样就会导致不同key的消息打包成一个command发过去。而消息的时候 broker 不会再去拆分开每一条消息，
+ * 也是整个包发送给consumer。所以会出现都跑到一个 consumer 的情况。关掉batch 相当于不会把多条消息打包了，
+ * keybased 是按照 消息的key 打包，一样的key打包在一起。所以这两个都可以
+ * 
+ * https://github.com/apache/pulsar/issues/7121
+ * 
+ * @author Zengmin.Zhang
+ *
+ */
 public class PulsarProducer {
 
 	private static PulsarClient client;
