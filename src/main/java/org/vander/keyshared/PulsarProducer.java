@@ -2,6 +2,7 @@ package org.vander.keyshared;
 
 import java.util.UUID;
 
+import org.apache.pulsar.client.api.BatcherBuilder;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.Schema;
@@ -16,16 +17,18 @@ public class PulsarProducer {
 
 		producer = client.newProducer(Schema.STRING)
 				// .topic("public/dominos/coupon3")
+				.enableBatching(false)
+				//.batcherBuilder(BatcherBuilder.KEY_BASED)
 				.topic("my-topic").create();
 
-		startProducer();
+		startProducer3();
 
 		System.exit(1);
 
 	}
 
 	private static void startProducer3() throws Exception {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			producer.newMessage().key(UUID.randomUUID().toString()).value(("message-1-" + i + "\n")).send();
 		}
 	}
