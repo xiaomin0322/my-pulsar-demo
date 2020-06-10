@@ -6,8 +6,19 @@ import org.apache.pulsar.client.api.PulsarClient;
 
 
 /**
+ * 
+ * pulsar security 
+
+支持这样得功能吗，比如说 topic-A  生产者.得密码只能topic-A生产者使用
+
+
+比如说 topic-A  消费者.得密码只能topic-A消费者使用
+??
+ * 
+ * 
  * http://pulsar.apache.org/docs/zh-CN/security-overview/
  * 	http://pulsar.apache.org/docs/zh-CN/security-jwt/
+ *   目前支持Nmaespace级别权限控制
  * @author Zengmin.Zhang
  *
  */
