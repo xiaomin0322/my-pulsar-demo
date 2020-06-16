@@ -9,7 +9,28 @@ import org.elasticsearch.client.RestClient;
 public class TestClient {
 
 	public static void main(String[] args) throws Exception {
-		testTranslate();
+		test4();
+		test5();
+	}
+	
+	public static void test4() throws Exception {
+		RestClient restClient = RestClient.builder(new HttpHost("cpp.es.com", 9400, "http")).build();
+		Request request = new Request("POST", "/_sql");
+		request.setJsonEntity("{\"query\":\"SELECT main_id FROM allworks  WHERE MATCH(content,'¿œÕº')   limit 10 \"}");
+		Response response = restClient.performRequest(request);
+		String responseBody = EntityUtils.toString(response.getEntity());
+		System.out.println(responseBody);
+		restClient.close();
+	}
+	
+	public static void test5() throws Exception {
+		RestClient restClient = RestClient.builder(new HttpHost("cpp.es.com", 9400, "http")).build();
+		Request request = new Request("POST", "/_sql/translate");
+		request.setJsonEntity("{\"query\":\"SELECT main_id FROM allworks  WHERE MATCH(content,'¿œÕº')   limit 10 \"}");
+		Response response = restClient.performRequest(request);
+		String responseBody = EntityUtils.toString(response.getEntity());
+		System.out.println(responseBody);
+		restClient.close();
 	}
 
 	/**
@@ -27,9 +48,19 @@ public class TestClient {
 	}
 
 	public static void test2() throws Exception {
-		RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200, "http")).build();
+		RestClient restClient = RestClient.builder(new HttpHost("cpp.es.com", 9400, "http")).build();
 		Request request = new Request("POST", "/_sql");
-		request.setJsonEntity("{\"query\":\"SELECT * FROM library WHERE release_date < '2000-01-01'\"}");
+		request.setJsonEntity("{\"query\":\"SELECT * FROM allworks WHERE QUERY('content:¿œÕº')   limit 10 \"}");
+		Response response = restClient.performRequest(request);
+		String responseBody = EntityUtils.toString(response.getEntity());
+		System.out.println(responseBody);
+		restClient.close();
+	}
+	
+	public static void test3() throws Exception {
+		RestClient restClient = RestClient.builder(new HttpHost("cpp.es.com", 9400, "http")).build();
+		Request request = new Request("POST", "/_sql/translate");
+		request.setJsonEntity("{\"query\":\"SELECT * FROM allworks WHERE QUERY('content:123')   limit 10 \"}");
 		Response response = restClient.performRequest(request);
 		String responseBody = EntityUtils.toString(response.getEntity());
 		System.out.println(responseBody);
