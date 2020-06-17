@@ -133,6 +133,13 @@ public class EsQueryUtils {
 			} catch (NumberFormatException e) {
 				return DateUtil.parseDate(val + ""); // 时间转换为yyyy-MM-dd HH:mm:ss 可以更换
 			}
+		}else if ("date".equals(type) || "datetime".equals(type)) {
+			// 防止时间转换错误
+			try {
+				return DateUtil.parse((String)val);// 时间戳转换
+			} catch (Exception e) {
+				return DateUtil.parseDate(val + ""); // 时间转换为yyyy-MM-dd HH:mm:ss 可以更换
+			}
 		}
 		return null;
 	}
