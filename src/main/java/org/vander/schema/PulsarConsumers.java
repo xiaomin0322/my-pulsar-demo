@@ -22,6 +22,7 @@ public class PulsarConsumers {
                 .build();
 
         consumer = client.newConsumer(JSONSchema.of(SensorReading.class))
+        		.replicateSubscriptionState(true)
         		.topic("my-topicschema-")
                 .ackTimeout(30, TimeUnit.SECONDS)
                 .subscriptionName("my-my_topicschema")
