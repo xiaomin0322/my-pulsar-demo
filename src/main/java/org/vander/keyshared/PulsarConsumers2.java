@@ -55,7 +55,7 @@ public class PulsarConsumers2 {
 			// Wait for a message
 			Message<byte[]> msg = consumer1.receive();
 			try {
-				System.out.printf(consumer1.getConsumerName()+"  Message received: %s", new String(msg.getData()) + "\r\n");
+				System.out.printf(consumer1.getConsumerName()+"  Message received: %s %s ",msg.getMessageId(), new String(msg.getData()) + "\r\n");
 				consumer1.acknowledge(msg);
 			} catch (Exception e) {
 				System.err.printf("Unable to consume message: %s", e.getMessage());
