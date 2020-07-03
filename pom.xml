@@ -88,5 +88,15 @@
 			<artifactId>pulsar-client</artifactId>
 			<version>${pulsar.version}</version>
 		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/dnsjava/dnsjava -->
+		<dependency>
+			<groupId>dnsjava</groupId>
+			<artifactId>dnsjava</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+
 	</dependencies>
 </project>
