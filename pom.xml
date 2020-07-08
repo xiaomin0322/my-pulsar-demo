@@ -98,5 +98,26 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>io.streamnative.pulsar.tracing</groupId>
+			<artifactId>opentracing-pulsar-client</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.opentracing.brave/brave-opentracing -->
+		<dependency>
+			<groupId>io.opentracing.brave</groupId>
+			<artifactId>brave-opentracing</artifactId>
+			<version>0.37.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.zipkin.reporter2/zipkin-sender-okhttp3 -->
+		<dependency>
+			<groupId>io.zipkin.reporter2</groupId>
+			<artifactId>zipkin-sender-okhttp3</artifactId>
+			<version>2.15.0</version>
+		</dependency>
+
+
 	</dependencies>
 </project>
