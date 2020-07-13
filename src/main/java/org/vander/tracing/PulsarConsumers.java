@@ -48,6 +48,7 @@ public class PulsarConsumers {
             // Wait for a message
             Message<byte[]> msg = consumer.receive();
             try {
+            	System.out.println("====="+msg.getMessageId());
                 System.out.println("Message received: %s   "+ new String(msg.getData()));
                 consumer.acknowledge(msg);
             } catch (Exception e) {
